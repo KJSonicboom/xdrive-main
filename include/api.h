@@ -76,6 +76,7 @@
 #include "pros/screen.hpp"
 #include "pros/vision.hpp"
 #include "pros/link.hpp"
+#include "lemlib/api.hpp" //lemlib file
 #endif
 
 #endif  // _PROS_API_H_

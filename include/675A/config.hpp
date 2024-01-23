@@ -1,6 +1,6 @@
 #pragma once //What does this do
 #include "api.h"
-using namespace pros; // and what does this do
+using namespace pros; 
 
 extern Controller master;
 
@@ -15,3 +15,6 @@ extern Motor_Group rightMotors;
 extern Motor_Group frontMotors;
 extern Motor_Group backMotors;
 
+extern IMU inertial_sensor;
+
+extern lemlib::Chassis chassis;

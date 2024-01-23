@@ -28,7 +28,7 @@ void initialize() {
 
 	pros::lcd::register_btn1_cb(on_center_button);
 
-	//chassis.calibrate(); <-- when we add inertial
+	chassis.calibrate(); 
 }
 
 /**
@@ -60,7 +60,10 @@ void competition_initialize() {}
  * will be stopped. Re-enabling the robot will restart the task, not re-start it
  * from where it left off.
  */
-void autonomous() {}
+void autonomous() {
+	testMovePID();
+	screenPos();
+}
 
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -77,24 +80,11 @@ void autonomous() {}
  */
 void opcontrol() {
 	
-	master.clear();
-	reset_drive_sensors();
-
 	Task driveTask(arcade_flipped);
-	//Task posPrint(screenPos);
 	//Task controllerStuff(ControllerData);
+	screenPos();
 
 }
-
-// void screenPos(){
-// 	while (true){
-// 		lemlib::Pose pose = chassis.getPose();
-// 		pros::lcd::print(0, "x: %f", pose.x);
-// 		pros::lcd::print(1, "y: %f", pose.y);
-// 		pros::lcd::print(2, "heading: %f", pose.theta);
-// 		pros::delay(10);
-// 	}
-// }
 
 // void ControllerData(){
 
@@ -107,5 +97,7 @@ void opcontrol() {
 // 			pros::std::int32_t set_text(1, 1, "Low battery");
 // 		}
 // 	}
+//  also make a time system where the controller rumbles at different frequencies during different intervals
+//  during the match (no need for a timer)
 
 // }

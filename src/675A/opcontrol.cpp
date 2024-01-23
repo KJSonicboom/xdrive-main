@@ -22,7 +22,7 @@ void checkThreshold(int x_dir, int y_dir, int rotation){
     //If the sticks are above the threshold then the bot is allowed to move
     if (abs(x_dir) > joystickThreshold || abs(y_dir) > joystickThreshold || abs(rotation) > joystickThreshold) {
         drive(x_dir, y_dir, rotation);
-        reset_drive_sensors();
+        //reset_drive_sensors();
     }
 
     else{ //This is where things might go wrong bc idk what im doing here
@@ -56,4 +56,14 @@ void arcade_flipped(){
 
     }
 
+}
+
+void screenPos(){
+	while (true){
+		lemlib::Pose pose = chassis.getPose();
+		pros::screen::print(TEXT_MEDIUM, 2, "x: %f", pose.x);
+		pros::screen::print(TEXT_MEDIUM, 3, "y: %f", pose.y);
+		pros::screen::print(TEXT_MEDIUM, 4, "angle: %f", pose.theta);
+		pros::delay(10);
+	}
 }

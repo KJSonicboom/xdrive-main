@@ -12,3 +12,4 @@ double right_curve_function(double x);
 void checkThreshold(int x_dir, int y_dir, int rotation);
 void drive(int x_dir, int y_dir, int rotation);
 void arcade_flipped();
+void screenPos();

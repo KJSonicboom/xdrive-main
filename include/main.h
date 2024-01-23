@@ -37,7 +37,7 @@
 #include "api.h"
 #include "675A/config.hpp"
 #include "675A/opcontrol.hpp"
-#include "lemlib/api.hpp"
+#include "675A/auton.hpp"
 
 /**
  * You should add more #includes here
