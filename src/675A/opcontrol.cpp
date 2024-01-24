@@ -1,5 +1,9 @@
 #include "main.h"
 
+//variables
+double magnitude;
+double angle;
+
 //This function resets the drive sensors do fix something idk i trust jonah
 void reset_drive_sensors(){
     leftMotors.tare_position();
@@ -33,12 +37,21 @@ void checkThreshold(int x_dir, int y_dir, int rotation){
     }
 }
 
-//This is where the bot actually moves after everything 
+//This is where the bot actually moves after everything w field orient
 void drive(int x_dir, int y_dir, int rotation){
-    left_front_motor.move_voltage((y_dir + x_dir + rotation) * (12000.0 / 127.0));  
+    magnitude = sqrt(pow(x_dir,2) + pow(y_dir, 2));
+    angle = chassis.getPose(true).theta + atan2(y_dir, x_dir);
+    x_dir = magnitude * cos(angle);
+    y_dir = magnitude * sin(angle); // I don't understand this math
+
+    left_front_motor.move_voltage((y_dir + x_dir + rotation) * (12000.0 / 127.0));  //why this number again?
     left_back_motor.move_voltage((y_dir - x_dir + rotation) * (12000.0 / 127.0)); 
-    right_front_motor.move_voltage((-y_dir + x_dir + rotation) *(12000.00 / 127.0));
+    right_front_motor.move_voltage((-y_dir + x_dir + rotation) * (12000.00 / 127.0));
     right_back_motor.move_voltage((-y_dir - x_dir + rotation) *(12000.00 / 127.0));
+
+    if(master.get_digital_new_press(DIGITAL_A)){
+        inertial_sensor.reset();
+    }
 }
 
 //Main function where everything comes together
@@ -58,12 +71,13 @@ void arcade_flipped(){
 
 }
 
+//print pos to screen
 void screenPos(){
 	while (true){
 		lemlib::Pose pose = chassis.getPose();
-		pros::screen::print(TEXT_MEDIUM, 2, "x: %f", pose.x);
-		pros::screen::print(TEXT_MEDIUM, 3, "y: %f", pose.y);
-		pros::screen::print(TEXT_MEDIUM, 4, "angle: %f", pose.theta);
+		pros::screen::print(TEXT_MEDIUM_CENTER, 2, "x: %f", pose.x);
+		pros::screen::print(TEXT_MEDIUM_CENTER, 3, "y: %f", pose.y);
+		pros::screen::print(TEXT_MEDIUM_CENTER, 4, "angle: %f", pose.theta);
 		pros::delay(10);
 	}
 }
