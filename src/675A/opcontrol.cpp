@@ -42,7 +42,7 @@ void drive(int x_dir, int y_dir, int rotation){
     magnitude = sqrt(pow(x_dir,2) + pow(y_dir, 2));
     angle = chassis.getPose(true).theta + atan2(y_dir, x_dir);
     x_dir = magnitude * cos(angle);
-    y_dir = magnitude * sin(angle); // I don't understand this math
+    y_dir = magnitude * sin(angle); 
 
     left_front_motor.move_voltage((y_dir + x_dir + rotation) * (12000.0 / 127.0));  
     left_back_motor.move_voltage((y_dir - x_dir + rotation) * (12000.0 / 127.0)); 
