@@ -44,7 +44,7 @@ void drive(int x_dir, int y_dir, int rotation){
     x_dir = magnitude * cos(angle);
     y_dir = magnitude * sin(angle); // I don't understand this math
 
-    left_front_motor.move_voltage((y_dir + x_dir + rotation) * (12000.0 / 127.0));  //why this number again?
+    left_front_motor.move_voltage((y_dir + x_dir + rotation) * (12000.0 / 127.0));  
     left_back_motor.move_voltage((y_dir - x_dir + rotation) * (12000.0 / 127.0)); 
     right_front_motor.move_voltage((-y_dir + x_dir + rotation) * (12000.00 / 127.0));
     right_back_motor.move_voltage((-y_dir - x_dir + rotation) *(12000.00 / 127.0));
